@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SB 194 Coalition Briefing | Stop SB 194</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            color: #1a1a1a; 
+            background-color: #f8fafc; 
+            line-height: 1.6;
+        }
+        
+        .bg-brand-dark { background-color: #005236; }
+        .bg-brand-mint { background-color: #6bc4a6; }
+        .bg-brand-orange { background-color: #ff992b; }
+        .bg-brand-urgent { background-color: #bb4f07; }
+
+        .text-brand-dark { color: #005236; }
+        .text-brand-mint { color: #6bc4a6; }
+        .text-brand-urgent { color: #bb4f07; }
+
+        .chart-container { 
+            position: relative; 
+            width: 100%; 
+            height: 300px; 
+            max-height: 350px;
+            margin: auto; 
+        }
+
+        .briefing-slide {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            border: 1px solid #e2e8f0;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .snapshot-card {
+            border-top: 4px solid #bb4f07;
+            background: #ffffff;
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th { @apply p-4 text-left uppercase text-[10px] font-black tracking-widest bg-slate-50 border-b border-slate-200; }
+        .comparison-table td { @apply p-4 text-sm border-b border-slate-100; }
+        
+        .nav-link:hover { color: #6bc4a6; }
+        section { scroll-margin-top: 6rem; }
+        h1, h2, h3, h4 { letter-spacing: -0.03em; }
+
+        .contact-pill {
+            @apply flex flex-col items-center bg-white/5 p-4 rounded-xl border border-white/10 hover:bg-white/10 transition;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#005236',
+                            mint: '#6bc4a6',
+                            orange: '#ff992b',
+                            urgent: '#bb4f07',
+                            charcoal: '#1a1a1a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- 
+    PALETTE: Coalition Briefing (Dark Green: #005236, Mint: #6bc4a6, Orange: #ff992b, Urgent: #bb4f07)
+    PLAN SUMMARY: 
+    1. Briefing Hybrid: Sections formatted as high-impact slides for coalition use.
+    2. Data Integrity: Uses 0% citizenship closure data to prove bill is unnecessary.
+    3. Resource Bank: Pruned to include only the 4 hyperlinked sources provided (Bill, Analysis, Fiscal, Closure Data).
+    4. Contacts: Explicit inclusion of Annika, Courtney, and Tia in the footer.
+    5. Updated: Date set to April 2026 and links pointed to investlouisiana.org.
+    CONFIRMATION: NEITHER Mermaid JS NOR SVG were used. All graphics are Canvas-based or structured HTML/CSS.
+    -->
+</head>
+<body class="antialiased bg-slate-50">
+
+    <!-- Sticky Coalition Navigation -->
+    <header class="bg-brand-dark text-white sticky top-0 z-50 shadow-lg border-b-4 border-brand-mint">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4">
+            <div class="flex items-center gap-4">
+                <div class="bg-white p-1 rounded">
+                    <img src="https://raw.githubusercontent.com/Tia-Fields/SNAP_ErrorRates_LA/418dff9d7dcd3df2baa81d9b0abe4fb4753517f2/IIL-Logo-Secondary-FullColor-SM.png" alt="Invest Louisiana" class="h-7 w-auto">
+                </div>
+                <div>
+                    <h1 class="text-base font-black uppercase leading-none tracking-tight">Coalition Briefing</h1>
+                    <p class="text-brand-mint font-bold text-[9px] uppercase tracking-widest mt-0.5">Stop SB 194 Campaign</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-6">
+                <nav class="hidden lg:flex gap-8 text-[10px] font-black uppercase tracking-widest">
+                    <a href="#snapshot" class="nav-link transition">Snapshot</a>
+                    <a href="#arguments" class="nav-link transition">Arguments</a>
+                    <a href="#rules" class="nav-link transition">Federal Rules</a>
+                    <a href="#evidence" class="nav-link transition">The Data</a>
+                    <a href="#messaging" class="nav-link transition">Messaging</a>
+                </nav>
+                <div class="bg-brand-urgent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">Oppose</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-12">
+
+        <!-- SLIDE 1: THE COALITION CASE (HERO) -->
+        <section id="hero" class="mb-16">
+            <div class="bg-brand-dark text-white rounded-[2.5rem] p-10 md:p-16 shadow-2xl relative overflow-hidden">
+                <div class="max-w-3xl relative z-10">
+                    <h2 class="text-xs font-black uppercase tracking-[0.4em] text-brand-mint mb-6">Coalition Briefing: Legislative Session 2026</h2>
+                    <h3 class="text-5xl md:text-6xl font-black mb-8 leading-tight">Why SB 194 Should Be Stopped.</h3>
+                    <p class="text-xl md:text-2xl text-slate-300 font-medium mb-10 leading-relaxed">
+                        SB 194 creates new barriers to health coverage, goes beyond federal law, and expands punitive enforcement without evidence of a documented citizenship-verification crisis.
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-xs font-black uppercase tracking-widest">
+                        <div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg border border-white/10">
+                            <span class="text-brand-mint">01.</span> Exceeds Federal Bounds
+                        </div>
+                        <div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg border border-white/10">
+                            <span class="text-brand-mint">02.</span> Strips Child Coverage
+                        </div>
+                        <div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg border border-white/10">
+                            <span class="text-brand-mint">03.</span> Manual Red Tape
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-brand-urgent rounded-full opacity-20 blur-3xl"></div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: BRIEFING SNAPSHOT -->
+        <section id="snapshot" class="mb-20">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-black text-brand-charcoal uppercase mb-2">What Partners Need to Know</h3>
+                <p class="text-slate-500 font-medium">Critical intelligence for rapid deployment.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="snapshot-card">
+                    <h4 class="text-[10px] font-black uppercase text-brand-urgent mb-1">Most Important Risk</h4>
+                    <p class="text-sm font-bold text-slate-800">SB 194 is more restrictive than federal law and strips health coverage from thousands of immigrant children the state has protected since 2019.</p>
+                </div>
+                <div class="snapshot-card">
+                    <h4 class="text-[10px] font-black uppercase text-brand-urgent mb-1">Most Vulnerable Group</h4>
+                    <p class="text-sm font-bold text-slate-800">Lawfully residing children and pregnant people—groups Congress explicitly protected under ICHIA but SB 194 neglects.</p>
+                </div>
+                <div class="snapshot-card">
+                    <h4 class="text-[10px] font-black uppercase text-brand-urgent mb-1">Strongest Legal Concern</h4>
+                    <p class="text-sm font-bold text-slate-800">Hard-capping "Reasonable Opportunity Periods" (ROP) violates CMS rules allowing extensions for good-faith verification efforts.</p>
+                </div>
+                <div class="snapshot-card">
+                    <h4 class="text-[10px] font-black uppercase text-brand-urgent mb-1">Best Administrative Argument</h4>
+                    <p class="text-sm font-bold text-slate-800">LDH systems already face repeated audit findings for eligibility errors. Adding manual ID proofing increases operational risk.</p>
+                </div>
+                <div class="snapshot-card">
+                    <h4 class="text-[10px] font-black uppercase text-brand-urgent mb-1">Best Data Point</h4>
+                    <p class="text-sm font-bold text-slate-800">Zero SNAP closures for "Failed Citizenship Requirement" in recent LDH reports. The "fraud crisis" doesn't exist in the data.</p>
+                </div>
+                <div class="snapshot-card">
+                    <h4 class="text-[10px] font-black uppercase text-brand-urgent mb-1">The One-Line Message</h4>
+                    <p class="text-sm font-bold text-slate-800">"SB 194 builds a massive wall of red tape for a problem the state's own data proves is not occurring."</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: WHAT THE BILL DOES -->
+        <section id="what-bill-does" class="briefing-slide">
+            <h3 class="text-3xl font-black text-brand-charcoal uppercase mb-10">Legislative Provisions: A Policy Summary</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <div class="h-10 w-10 bg-slate-100 rounded-full flex items-center justify-center flex-shrink-0 text-brand-dark font-black">01</div>
+                        <div>
+                            <h4 class="font-bold uppercase text-brand-charcoal text-sm mb-1">Narrows Benefit Eligibility</h4>
+                            <p class="text-xs text-slate-500 leading-relaxed">Redefines "qualified alien" more strictly than the federal PRWORA baseline, targeting Medicaid, SNAP, and ACA Marketplace.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="h-10 w-10 bg-slate-100 rounded-full flex items-center justify-center flex-shrink-0 text-brand-dark font-black">02</div>
+                        <div>
+                            <h4 class="font-bold uppercase text-brand-charcoal text-sm mb-1">Hard-Caps Verification Time</h4>
+                            <p class="text-xs text-slate-500 leading-relaxed">Mandates a single reasonable opportunity period (ROP) and bars any future ROP after a prior denial—even if status has changed.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="h-10 w-10 bg-slate-100 rounded-full flex items-center justify-center flex-shrink-0 text-brand-dark font-black">03</div>
+                        <div>
+                            <h4 class="font-bold uppercase text-brand-charcoal text-sm mb-1">Mandates Manual ID Proofing</h4>
+                            <p class="text-xs text-slate-500 leading-relaxed">Explicitly forbids relying on electronic data matches alone for identity, forcing staff into manual document review for every applicant.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <div class="h-10 w-10 bg-slate-100 rounded-full flex items-center justify-center flex-shrink-0 text-brand-dark font-black">04</div>
+                        <div>
+                            <h4 class="font-bold uppercase text-brand-charcoal text-sm mb-1">Expands ICE Referrals</h4>
+                            <p class="text-xs text-slate-500 leading-relaxed">Requires the state to refer applicants who fail verification to U.S. Immigration and Customs Enforcement.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="h-10 w-10 bg-slate-100 rounded-full flex items-center justify-center flex-shrink-0 text-brand-dark font-black">05</div>
+                        <div>
+                            <h4 class="font-bold uppercase text-brand-charcoal text-sm mb-1">Voter List Maintenance Reporting</h4>
+                            <p class="text-xs text-slate-500 leading-relaxed">Requires monthly reporting to the Secretary of State for voter registration list maintenance purposes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: WHY WE OPPOSE IT -->
+        <section id="arguments" class="mb-20">
+            <h3 class="text-3xl font-black text-brand-charcoal uppercase mb-10 text-center">The Coalition Arguments</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card border-l-8 border-brand-mint p-8">
+                    <h4 class="text-xl font-black text-brand-dark uppercase mb-3">01. It Goes Further Than Federal Law</h4>
+                    <p class="text-sm font-bold text-slate-700 mb-2">Congress allows for state flexibility; SB 194 chooses restriction.</p>
+                    <p class="text-xs text-slate-500 mb-4">Federal rules allow for multiple opportunity periods and extensions, recognizing the complexity of status verification.</p>
+                    <div class="bg-slate-50 p-3 rounded text-[10px] font-black uppercase text-brand-dark">Source: 42 CFR 435.952(c) Analysis</div>
+                </div>
+                <div class="card border-l-8 border-brand-orange p-8">
+                    <h4 class="text-xl font-black text-brand-dark uppercase mb-3">02. It Threatens Coverage for Eligible Kids</h4>
+                    <p class="text-sm font-bold text-slate-700 mb-2">Lawfully residing children are the primary collateral damage.</p>
+                    <p class="text-xs text-slate-500 mb-4">By omitting the ICHIA/CHIPRA 214 option, this bill strips coverage the state chose to provide years ago, harming kids who are legally in the country.</p>
+                    <div class="bg-slate-50 p-3 rounded text-[10px] font-black uppercase text-brand-dark">Source: Invest in Louisiana Testimony (SB 194)</div>
+                </div>
+                <div class="card border-l-8 border-brand-urgent p-8">
+                    <h4 class="text-xl font-black text-brand-dark uppercase mb-3">03. It Punishes People for Paperwork Barriers</h4>
+                    <p class="text-sm font-bold text-slate-700 mb-2">Hard caps on ROPs are punitive and illegal.</p>
+                    <p class="text-xs text-slate-500 mb-4">Paperwork delays often come from federal agency backlogs, not applicant fraud. This bill punishes citizens for administrative friction.</p>
+                    <div class="bg-slate-50 p-3 rounded text-[10px] font-black uppercase text-brand-dark">Source: Side-by-Side Regulatory Analysis</div>
+                </div>
+                <div class="card border-l-8 border-brand-dark p-8">
+                    <h4 class="text-xl font-black text-brand-dark uppercase mb-3">04. It Adds Red Tape to Broken Systems</h4>
+                    <p class="text-sm font-bold text-slate-700 mb-2">Forcing manual verification on an audit-strained agency is reckless.</p>
+                    <p class="text-xs text-slate-500 mb-4">LDH already struggles with eligibility accuracy. Adding more manual workload increases the risk of wrongful denials for every applicant.</p>
+                    <div class="bg-slate-50 p-3 rounded text-[10px] font-black uppercase text-brand-dark">Source: 2025 Audit Report on LDH Eligibility</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: FEDERAL RULE COMPARISON -->
+        <section id="rules" class="mb-20">
+            <div class="bg-white rounded-3xl p-10 border border-slate-200 shadow-xl overflow-hidden">
+                <h3 class="text-3xl font-black text-brand-charcoal uppercase mb-8">Federal Compliance Conflict Check</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Provision</th>
+                                <th class="text-brand-mint">Federal Rule</th>
+                                <th class="text-brand-urgent">SB 194 Provision</th>
+                                <th>The Risk</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-bold">Child/Pregnancy Option (ICHIA)</td>
+                                <td class="text-slate-600">State option to cover lawfully residing kids/pregnant people.</td>
+                                <td class="text-brand-urgent font-bold">Omitted. Strips existing coverage.</td>
+                                <td class="text-xs">Stripping medical access for legal residents.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Number of ROPs</td>
+                                <td class="text-slate-600">Flexible; allows multiple periods based on need.</td>
+                                <td class="text-brand-urgent font-bold">Capped at one single period.</td>
+                                <td class="text-xs">CMS rule violation; due process concerns.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">ROP Flexibility</td>
+                                <td class="text-slate-600">Allows extensions for "good-faith" efforts.</td>
+                                <td class="text-brand-urgent font-bold">Strict 90-day cap with no extensions.</td>
+                                <td class="text-xs">Punitive for federal agency backlogs.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Identity Verification</td>
+                                <td class="text-slate-600">Prioritizes streamlined electronic data matches.</td>
+                                <td class="text-brand-urgent font-bold">Forbids data-only identity verification.</td>
+                                <td class="text-xs">Step backward in program efficiency.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: THE DATA SPOTLIGHT -->
+        <section id="evidence" class="mb-20">
+            <div class="bg-brand-dark text-white rounded-[2.5rem] p-12 shadow-2xl">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-xs font-black uppercase tracking-[0.4em] text-brand-mint mb-4">Evidence Slide</h3>
+                        <h4 class="text-4xl font-black mb-6 leading-tight">The Data Does Not Show a Citizenship-Closure Crisis.</h4>
+                        <p class="text-lg text-slate-300 mb-8 leading-relaxed">
+                            The justification for this sweeping barrier regime is nonexistent in the state's own monthly reports. Families are losing benefits due to paperwork churn, not citizenship fraud.
+                        </p>
+                        <div class="card bg-brand-urgent/20 border border-brand-urgent/50 p-6 rounded-2xl">
+                            <div class="text-5xl font-black text-white mb-2">0</div>
+                            <h5 class="text-[10px] font-black uppercase text-brand-mint tracking-widest mb-2">Monthly Factual Anchor</h5>
+                            <p class="text-sm font-bold">In the February 2026 SNAP closure reports, closures for "Failed Citizenship Requirement" were exactly zero.</p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="closureDonutChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: MESSAGING BRIEF -->
+        <section id="messaging" class="mb-20">
+            <h3 class="text-3xl font-black text-brand-charcoal uppercase mb-10 text-center">Speaker Briefing Cards</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card bg-brand-charcoal text-white p-10">
+                    <h4 class="text-brand-mint font-black uppercase text-xs mb-6 tracking-widest">For Legislator Meetings</h4>
+                    <ul class="space-y-6 text-sm font-bold italic opacity-90">
+                        <li class="pl-4 border-l-2 border-brand-mint">"SB 194 is more restrictive than federal law requires and will strip health coverage from Louisiana children."</li>
+                        <li class="pl-4 border-l-2 border-brand-mint">"Adding manual paperwork to a system that already struggles with audits will only increase state error rates."</li>
+                        <li class="pl-4 border-l-2 border-brand-mint">"Why are we building an enforcement wall for a problem that zeroed out in last month's closure data?"</li>
+                    </ul>
+                </div>
+                <div class="card border-brand-urgent bg-red-50 p-10">
+                    <h4 class="text-brand-urgent font-black uppercase text-xs mb-6 tracking-widest">For Committee Testimony</h4>
+                    <ul class="space-y-6 text-sm font-bold italic text-slate-700">
+                        <li class="pl-4 border-l-2 border-brand-urgent">"This bill is unnecessarily punitive, capping opportunity periods for citizens acting in good faith."</li>
+                        <li class="pl-4 border-l-2 border-brand-urgent">"We should be fixing the 55% procedural case loss, not creating new barriers for the 0% citizenship group."</li>
+                        <li class="pl-4 border-l-2 border-brand-urgent">"Barring electronic identity matches is a step backward for government efficiency and accuracy."</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: RESOURCE BANK -->
+        <section id="docs" class="mb-20">
+            <div class="card bg-slate-900 text-white p-10">
+                <div class="mb-10 text-center">
+                    <h3 class="text-2xl font-black uppercase text-brand-mint">Advocacy Resource Bank</h3>
+                    <p class="text-xs text-slate-400 mt-2 uppercase tracking-widest">Verified Coalition Materials</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <a href="https://legis.la.gov/legis/ViewDocument.aspx?d=1444720" target="_blank" class="flex flex-col items-center p-6 bg-white/5 rounded-2xl hover:bg-white/10 transition border border-white/10">
+                        <div class="text-3xl mb-3 text-brand-mint">&#128196;</div>
+                        <span class="text-[10px] font-black uppercase text-center tracking-widest">Bill Text</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/1jm0QLxck6tKr2rI70nFPJbVhOUJApt1VyhrDeAjU_Z8/edit?usp=sharing" target="_blank" class="flex flex-col items-center p-6 bg-white/5 rounded-2xl hover:bg-white/10 transition border border-white/10">
+                        <div class="text-3xl mb-3 text-brand-orange">&#128202;</div>
+                        <span class="text-[10px] font-black uppercase text-center tracking-widest">Side-By-Side Analysis</span>
+                    </a>
+                    <a href="https://legis.la.gov/legis/ViewDocument.aspx?d=1462423" target="_blank" class="flex flex-col items-center p-6 bg-white/5 rounded-2xl hover:bg-white/10 transition border border-white/10">
+                        <div class="text-3xl mb-3 text-yellow-500">&#128181;</div>
+                        <span class="text-[10px] font-black uppercase text-center tracking-widest">Fiscal Note</span>
+                    </a>
+                    <a href="https://ldh.la.gov/assets/docs/searchable/OFS/Statistics/Stats25-26/SNAP/fy2026_FS_Closures.pdf" target="_blank" class="flex flex-col items-center p-6 bg-white/5 rounded-2xl hover:bg-white/10 transition border border-white/10">
+                        <div class="text-3xl mb-3 text-blue-400">&#128200;</div>
+                        <span class="text-[10px] font-black uppercase text-center tracking-widest">Closure Data</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Coalition Footer & Team Contacts -->
+    <footer class="bg-brand-charcoal text-white pt-16 pb-12 border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="mb-12 text-center">
+                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-brand-mint mb-8">Invest in Louisiana Coalition Leadership</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="contact-pill">
+                        <span class="text-base font-bold tracking-tight text-white mb-1">Annika Vanderspek</span>
+                        <a href="mailto:Annika@investlouisiana.org" class="text-brand-mint font-bold text-[10px] uppercase tracking-widest hover:text-white transition">Annika@investlouisiana.org</a>
+                    </div>
+                    <div class="contact-pill">
+                        <span class="text-base font-bold tracking-tight text-white mb-1">Courtney Foster</span>
+                        <a href="mailto:courtney@investlouisiana.org" class="text-brand-mint font-bold text-[10px] uppercase tracking-widest hover:text-white transition">courtney@investlouisiana.org</a>
+                    </div>
+                    <div class="contact-pill">
+                        <span class="text-base font-bold tracking-tight text-white mb-1">Tia Fields</span>
+                        <a href="mailto:Tia@investlouisiana.org" class="text-brand-mint font-bold text-[10px] uppercase tracking-widest hover:text-white transition">Tia@investlouisiana.org</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-[9px] opacity-20 uppercase tracking-[0.3em]">Coalition Internal Briefing Material | April 2026</p>
+                <div class="flex gap-6 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                    <a href="https://investlouisiana.org" target="_blank" class="hover:text-brand-mint">Invest in Louisiana Website</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function wrapLabels(labels, maxChars) {
+            return labels.map(label => {
+                if (typeof label !== 'string' || label.length <= maxChars) return label;
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + word).length > maxChars) {
+                        if (currentLine) lines.push(currentLine.trim());
+                        currentLine = word + ' ';
+                    } else {
+                        currentLine += word + ' ';
+                    }
+                });
+                if (currentLine) lines.push(currentLine.trim());
+                return lines;
+            });
+        }
+
+        const tooltipConfig = {
+            plugins: {
+                tooltip: {
+                    backgroundColor: '#1a1a1a',
+                    titleFont: { family: 'Inter', size: 12, weight: '900' },
+                    bodyFont: { family: 'Inter', size: 12 },
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            } else {
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const donutLabels = wrapLabels(['Procedural Failures (Admin Error)', 'Failed Income/Resource Test', 'Failed Citizenship Requirement'], 20);
+            const ctxDonut = document.getElementById('closureDonutChart').getContext('2d');
+            new Chart(ctxDonut, {
+                type: 'doughnut',
+                data: {
+                    labels: donutLabels,
+                    datasets: [{
+                        data: [55.4, 44.6, 0],
+                        backgroundColor: ['#bb4f07', '#005236', '#6bc4a6'],
+                        borderWidth: 4,
+                        borderColor: '#005236'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { 
+                            position: 'right', 
+                            labels: { 
+                                color: '#ffffff',
+                                font: { family: 'Inter', size: 10, weight: '700' },
+                                padding: 20
+                            } 
+                        },
+                        ...tooltipConfig.plugins
+                    },
+                    cutout: '75%'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
